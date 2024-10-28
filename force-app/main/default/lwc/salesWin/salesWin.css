@@ -1,11 +1,21 @@
 .main {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+h2{
+    font-weight: bold;
+    font-size: 14px;
+}
+.redspan{
+    color: red;
 }
 .flexRow{
     display: flex;
     flex-direction: row;
 }
-
 .flexColumn{
     display: flex;
     flex-direction: column;
