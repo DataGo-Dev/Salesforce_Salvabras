@@ -24,11 +24,11 @@
 
   <aura:attribute name="recordId" type="Id"></aura:attribute>
   
-  <c:salesWin
+  <c:salesWinHome
     tracker="aura"
     recordId="{!v.recordId}"
     onmodalclose="{!c.handleClose}"
     onrefresh="{!c.handleRefresh}"
-  ></c:salesWin>
+  ></c:salesWinHome>
 
 </aura:component>

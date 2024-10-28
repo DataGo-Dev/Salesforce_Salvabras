@@ -4,12 +4,13 @@
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    position: relative;
     background-color: white;
     border-radius: 10px;
 }
 h2{
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
 }
 .redspan{
     color: red;
@@ -49,3 +50,10 @@ h2{
 .w100{
     width: 100%;
 }
+
+.newPedArea{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+

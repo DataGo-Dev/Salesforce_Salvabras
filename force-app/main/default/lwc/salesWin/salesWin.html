@@ -1,43 +1,39 @@
 <template>
-
     <div class="main">
 
-        <div class="flexColumn gap w100">
+  
+    <div class="flexColumn gap w100">
 
-            <h2>Nova Oportunidade</h2>
+        <h2>Nova Oportunidade</h2>
 
-            <lightning-input 
-                type="text" 
-                label="Nome da Oportunidade"
-                value={values.nomeOpp}
-                onchange={handleSelectValue}
-                data-key="nomeOpp"
-                required
-            ></lightning-input>
+        <lightning-input 
+            type="text" 
+            label="Nome da Oportunidade"
+            value={values.nomeOpp}
+            onchange={handleSelectValue}
+            data-key="nomeOpp"
+            required
+        ></lightning-input>
 
-            <lightning-combobox
-                label="Tabela de preços"
-                value={values.pricebook}
-                placeholder="Selecione"
-                options={pricebooks}
-                onchange={handleSelectValue}
-                data-key="pricebook"
-                required
-            ></lightning-combobox>
+        <lightning-combobox
+            label="Tabela de preços"
+            value={values.pricebook}
+            placeholder="Selecione"
+            options={pricebooks}
+            onchange={handleSelectValue}
+            data-key="pricebook"
+            required
+        ></lightning-combobox>
 
-            <lightning-input 
-                type="date" 
-                label="Data do Fechamento"
-                value={values.dataFechamento}
-                onchange={handleSelectValue}
-                data-key="dataFechamento"
-                required
-            ></lightning-input>
-
-        </div>
-
+        <lightning-input 
+            type="date" 
+            label="Data do Fechamento"
+            value={values.dataFechamento}
+            onchange={handleSelectValue}
+            data-key="dataFechamento"
+            required
+        ></lightning-input>
 
     </div>
-
-
+    </div>
 </template>

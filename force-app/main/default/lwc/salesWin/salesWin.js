@@ -1,7 +1,8 @@
-import { LightningElement, api } from "lwc";
+import { api } from "lwc";
+import LightningModal from 'lightning/modal';
 import getPricebooks from '@salesforce/apex/SalesWin.getPricebooks';
 
-export default class SalesWin extends LightningElement {
+export default class SalesWin extends LightningModal {
 
     @api recordId; pricebooks; values = {};   
     async connectedCallback(){        
