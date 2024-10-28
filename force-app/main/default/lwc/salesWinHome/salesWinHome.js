@@ -1,5 +1,5 @@
 import { LightningElement, api } from "lwc";
-import newOppModal from "c/salesWin";
+import newOppModal from "c/salesWinNewOpp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class SalesWinHome extends LightningElement {
