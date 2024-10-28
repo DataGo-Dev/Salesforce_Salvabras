@@ -48,6 +48,14 @@ public with sharing class SalesWin {
 
     }
 
+
+    @AuraEnabled
+    public static void saveOpp(Opportunity opp){
+        upsert opp; 
+    }
+
+
+
     public class Options{
         @AuraEnabled
         public String label {get; set;}

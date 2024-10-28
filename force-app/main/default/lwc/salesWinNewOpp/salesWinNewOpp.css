@@ -6,6 +6,7 @@
     width: 100%;
     background-color: white;
     border-radius: 10px;
+    position: relative;
 }
 h2{
     font-weight: bold;
@@ -48,4 +49,13 @@ h2{
 }
 .w100{
     width: 100%;
+}
+.custonFields{
+    padding: 4px;
+}
+.errMsg{
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 7px;
 }
