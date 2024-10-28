@@ -1,0 +1,34 @@
+<aura:component
+  implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"
+>
+  <aura:html tag="style">
+
+  .quick-actions-panel{
+    overflow-y: hidden !important;  
+  }
+  .slds-p-around--medium {
+    padding: 1rem !important; 
+  }
+  .slds-modal__content {
+    height: 70vh !important; 
+    max-height: 70vh !important; 
+    overflow-y: auto !important;  
+  }
+  .slds-modal__container {
+    max-width: 70vw !important; 
+    width: 70vw !important;
+    height: vh !important;
+  }
+
+  </aura:html>
+
+  <aura:attribute name="recordId" type="Id"></aura:attribute>
+  
+  <c:salesWin
+    tracker="aura"
+    recordId="{!v.recordId}"
+    onmodalclose="{!c.handleClose}"
+    onrefresh="{!c.handleRefresh}"
+  ></c:salesWin>
+
+</aura:component>
