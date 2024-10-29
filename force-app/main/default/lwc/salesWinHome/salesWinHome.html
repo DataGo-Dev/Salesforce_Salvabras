@@ -4,8 +4,8 @@
     <lightning-card  title="Oportunidades">
         <lightning-button if:false={showNewAla} label="Nova" slot="actions" icon-name="utility:add" onclick={handleClickNew}></lightning-button>
         <lightning-button if:true={showNewAla} label="Cancelar" slot="actions" icon-name="utility:close" variant="destructive-text" onclick={handleClickNew}></lightning-button>
-        <div class="main">
-
+        <div class="main relative">
+            <lightning-spinner if:true={loading} size="x-small"></lightning-spinner>
             <div class="flexColumn gap" if:true={showNewAla}>
                 <lightning-combobox
                     label="Tabela de preços"
@@ -46,6 +46,15 @@
                     </div>
                 </div>
             </template>
+            <div class="flexRow justCenter alignCenter relative" if:true={showNextPageBtn}>
+                <lightning-spinner if:true={loadingPage} size="x-small"></lightning-spinner>
+                    <lightning-icon
+                            style="cursor: pointer;"
+                           icon-name="utility:chevrondown"
+                           size="small"
+                           onclick={getOpps}
+                    ></lightning-icon>
+            </div>
             
         </div>
 

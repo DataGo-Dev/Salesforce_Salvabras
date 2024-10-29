@@ -2,7 +2,7 @@ public with sharing class SalesWin {
 
 
     @AuraEnabled
-    public static List<Opportunity> getOpps(String accountId){
+    public static List<Opportunity> getOpps(String accountId, Integer offset){
         
         List<Opportunity> opps = [
             SELECT 
@@ -19,6 +19,7 @@ public with sharing class SalesWin {
             WHERE 
                 AccountId = :accountId
                 order by createdDate desc
+                limit 3 offset :offset
             ];
 
         return opps;

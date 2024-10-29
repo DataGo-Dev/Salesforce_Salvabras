@@ -10,20 +10,34 @@ export default class SalesWinHome extends NavigationMixin(LightningElement) {
 
     @api recordId;
 
-    pricebooks; pricebookValue; loading=false; 
-    opps;
+    pricebooks; pricebookValue; loadingPage=false; loading=false;
+    opps; offset=0; pageSize=3;
     async connectedCallback(){     
+        this.loading= true;
         this.pricebooks = await getPricebooks({recordId: this.recordId});
+        await this.getOpps();
+        this.loading= false;
+    }
 
-        const myOpps = await getOpps({accountId: this.recordId});
+    showNextPageBtn = false;
+    async getOpps(){
+        this.loadingPage = true;
+        const myOpps = await getOpps({accountId: this.recordId, offset: this.offset});
+
+        this.offset += this.pageSize;
+        this.showNextPageBtn = (myOpps.length >= this.pageSize);
+
         myOpps.forEach(el => {
                 el.link = '/'+el.Id;
                 el.createdByLink = '/'+el.CreatedById;
                 el.f_createdDate = helper.formatDate(el.CreatedDate, false, true);
         });
+        if(!this.opps){this.opps = [];}
 
-        this.opps = myOpps;
+        this.opps = [...this.opps, ...myOpps];
+        this.loadingPage = false;
     }
+
     handleSelectValue(event){
         const value =  event.detail.value; 
         this.pricebookValue = value;  
