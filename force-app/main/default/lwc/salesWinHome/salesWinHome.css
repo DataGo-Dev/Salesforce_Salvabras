@@ -2,11 +2,26 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     width: 100%;
     position: relative;
     background-color: white;
     border-radius: 10px;
+}
+.padding{
+    padding: 10px;
+}
+.infosLine{
+
+}
+.blockLines{
+    min-height: 70px;
+    gap: 2px;
+}
+.line{
+    background-color: #FF5D2D;
+    width: 2px;
+    height: 100%;
 }
 h2{
     font-weight: bold;
@@ -25,6 +40,14 @@ h2{
 }
 .gap{
     gap: 10px
+}
+.gap4{
+    gap: 4px
+}
+.dat{
+    font-size: 10px;
+    font-weight: 400;
+    color: #959595;
 }
 .justCenter{
     justify-content: center;

@@ -1,4 +1,29 @@
 public with sharing class SalesWin {
+
+
+    @AuraEnabled
+    public static List<Opportunity> getOpps(String accountId){
+        
+        List<Opportunity> opps = [
+            SELECT 
+                Id, 
+                Name, 
+                StageName, 
+                Amount, 
+                CloseDate, 
+                CreatedDate, 
+                CreatedBy.Name,
+                CreatedById,
+                Account.Name
+            FROM Opportunity
+            WHERE 
+                AccountId = :accountId
+                order by createdDate desc
+            ];
+
+        return opps;
+            
+    }
     
     @AuraEnabled
     public static List<Options> getPricebooks(String recordId) {

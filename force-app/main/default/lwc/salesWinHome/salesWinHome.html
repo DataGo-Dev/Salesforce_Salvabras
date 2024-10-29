@@ -2,7 +2,7 @@
 
 
     <lightning-card  title="Oportunidades">
-        <lightning-button if:false={showNewAla} label="Novo" slot="actions" icon-name="utility:add" onclick={handleClickNew}></lightning-button>
+        <lightning-button if:false={showNewAla} label="Nova" slot="actions" icon-name="utility:add" onclick={handleClickNew}></lightning-button>
         <lightning-button if:true={showNewAla} label="Cancelar" slot="actions" icon-name="utility:close" variant="destructive-text" onclick={handleClickNew}></lightning-button>
         <div class="main">
 
@@ -25,9 +25,32 @@
                     ></lightning-button>
                 </div>
             </div>
-
-
+            <template if:true={opps} for:each={opps} for:item="opp">
+                <div class="flexRow gap" key={opp.Id}>
+                    <div class="flexColumn alignCenter blockLines" >
+                        <lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flexColumn grow infosLine">
+                        <div class="flexRow gap4">
+                            <div class="grow">
+                                <a href={opp.link}>
+                                    <span>{opp.Name}</span>
+                                </a>
+                            </div>
+                            <span class="dat">{opp.f_createdDate}</span>
+                        </div>
+                        <div>
+                            Criado por <a href={opp.createdByLink}>{opp.CreatedBy.Name}</a>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            
         </div>
+
+        
+
     </lightning-card>
 
    
