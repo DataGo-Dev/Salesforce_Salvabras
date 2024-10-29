@@ -4,12 +4,19 @@
     <lightning-card  title="Produtos" icon-name="standard:products">
         <div class="main relative">
             
-            <lightning-input type="text" value={term} placeholder="Pesquisar..." variant="label-hidden" onchange={handleInputChange}></lightning-input>
+            <lightning-input 
+                type="text" 
+                value={term} 
+                placeholder="Pesquisar..." 
+                variant="label-hidden" 
+                onchange={handleInputChange} 
+                onkeydown={handleKeyDown}>
+            </lightning-input>
 
             <div class="boxResults" if:true={produtos}>
                 <div class="results flexColumn gap5">
                     <template for:each={produtos} for:item="prod">
-                        <div key={prod.Id} class="flexColumn w100 gap5 itemBusca">
+                        <div key={prod.Id} class="flexColumn w100 gap5 itemBusca" onclick={hanldleClickItem} data-id={prod.Id}>
                             <h2>
                                 {prod.Name}
                             </h2>

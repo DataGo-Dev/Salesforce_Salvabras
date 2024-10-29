@@ -47,7 +47,10 @@ h2{
     background-color: #5A1BA9;
     color: white;
 }
-
+.selected {
+    background-color: #f0f0f0; /* Cor de fundo para a opção selecionada */
+    color: #005fb2; /* Cor do texto para a opção selecionada */
+}
 .flexColumn{
     display: flex;
     flex-direction: column;
