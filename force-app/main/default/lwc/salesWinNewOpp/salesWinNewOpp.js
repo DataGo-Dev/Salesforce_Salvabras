@@ -1,7 +1,7 @@
 import { api, track } from "lwc";
 import LightningModal from 'lightning/modal';
 import getPricebooks from '@salesforce/apex/SalesWin.getPricebooks';
-import saveOpp from "@salesforce/apex/SalesWin.saveOpp";
+import { NavigationMixin } from "lightning/navigation";
 
 
 export default class SalesWin extends LightningModal {
@@ -18,24 +18,8 @@ export default class SalesWin extends LightningModal {
         this.values[key] = value;  
     }
 
-    async saveOpp(){
-        this.msg = undefined;
-        
-        this.setLoading(true);
-        await saveOpp({opp: this.values}).then(resp => {
-            
-            const result = {
-                ok: true
-            }
-    
-            this.close(result);
+    async continueToOpp(){
 
-        }).catch(err=>{
-            this.msg = this.findMessage(err);
-        });
-
-
-        this.setLoading(false);
 
     
     }
@@ -47,36 +31,46 @@ export default class SalesWin extends LightningModal {
 
 
 
-    findMessage(obj) {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (key === 'message') {
-                    return obj[key];
-                } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-                    const result = this.findMessage(obj[key]); 
-                    if (result) {
-                        return result;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
 
     get disableSave(){
-        const {Name, Pricebook2Id, StageName, CloseDate} = this.values;
+        const {Pricebook2Id} = this.values;
 
         const isValid = (value) => {
             return value && value.trim() !== '';
         };
-    
-
-        return !isValid(Name) 
-            || !isValid(Pricebook2Id) 
-            || !isValid(StageName) 
-            || !isValid(CloseDate);
+        return !isValid(Pricebook2Id) 
     }
 
+
+    // get disableSave(){
+    //     const {Name, Pricebook2Id, StageName, CloseDate} = this.values;
+
+    //     const isValid = (value) => {
+    //         return value && value.trim() !== '';
+    //     };
+    
+
+    //     return !isValid(Name) 
+    //         || !isValid(Pricebook2Id) 
+    //         || !isValid(StageName) 
+    //         || !isValid(CloseDate);
+    // }
+
+
+    // findMessage(obj) {
+    //     for (const key in obj) {
+    //         if (obj.hasOwnProperty(key)) {
+    //             if (key === 'message') {
+    //                 return obj[key];
+    //             } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+    //                 const result = this.findMessage(obj[key]); 
+    //                 if (result) {
+    //                     return result;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return null;
+    // }
 
 }

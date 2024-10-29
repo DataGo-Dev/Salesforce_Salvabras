@@ -12,17 +12,17 @@
         </div>
 
 
-        <lightning-record-edit-form object-api-name="Opportunity">
+        <!-- <lightning-record-edit-form object-api-name="Opportunity"> -->
             
-            <div class="custonFields">
-                <lightning-input 
+            <!-- <div class="custonFields"> -->
+                <!-- <lightning-input 
                     type="text" 
                     label="Nome da Oportunidade"
                     value={values.Name}
                     onchange={handleSelectValue}
                     data-key="Name"
                     required
-                ></lightning-input>
+                ></lightning-input> -->
 
                 <lightning-combobox
                     label="Tabela de preços"
@@ -34,30 +34,30 @@
                     required
                 ></lightning-combobox>
 
-                <lightning-input 
+                <!-- <lightning-input 
                     type="date" 
                     label="Data do Fechamento"
                     value={values.CloseDate}
                     onchange={handleSelectValue}
                     data-key="CloseDate"
                     required
-                ></lightning-input>
-            </div>
+                ></lightning-input> -->
+            <!-- </div> -->
             
-            <lightning-input-field 
+            <!-- <lightning-input-field 
                 field-name="StageName" 
                 value={values.StageName}
                 data-key="StageName"
                 onchange={handleSelectValue}
-            ></lightning-input-field>
+            ></lightning-input-field> -->
 
-        </lightning-record-edit-form>
+        <!-- </lightning-record-edit-form> -->
 
 
         <div class="flexRow justEnd w100">
             <lightning-button 
                 variant="brand" 
-                label="Salvar" onclick={saveOpp} 
+                label="Continuar" onclick={continueToOpp} 
                 disabled={disableSave} 
             ></lightning-button>
         </div>

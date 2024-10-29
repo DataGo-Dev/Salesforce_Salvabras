@@ -2,8 +2,30 @@
 
 
     <lightning-card  title="Oportunidades">
-        <lightning-button label="Novo" slot="actions" icon-name="utility:add" onclick={handleClickNew}></lightning-button>
+        <lightning-button if:false={showNewAla} label="Novo" slot="actions" icon-name="utility:add" onclick={handleClickNew}></lightning-button>
+        <lightning-button if:true={showNewAla} label="Cancelar" slot="actions" icon-name="utility:close" variant="destructive-text" onclick={handleClickNew}></lightning-button>
         <div class="main">
+
+            <div class="flexColumn gap" if:true={showNewAla}>
+                <lightning-combobox
+                    label="Tabela de preços"
+                    value={pricebookValue}
+                    placeholder="Selecione"
+                    options={pricebooks}
+                    onchange={handleSelectValue}
+                    data-key="Pricebook2Id"
+                    required
+                ></lightning-combobox>
+
+                <div class="flexRow justEnd">
+                    <lightning-button 
+                        variant="brand" 
+                        label="Continuar" onclick={continueToOpp} 
+                        disabled={disableSave} 
+                    ></lightning-button>
+                </div>
+            </div>
+
 
         </div>
     </lightning-card>
