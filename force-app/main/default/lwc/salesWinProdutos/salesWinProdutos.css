@@ -2,12 +2,13 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     width: 100%;
     position: relative;
     background-color: white;
     border-radius: 10px;
 }
+
 .boxResults{
     overflow: hidden;
     padding: 15px;
@@ -87,4 +88,24 @@ h2{
 }
 .w50{
     width: 50%;
+}
+.blockLines{
+    min-height: 70px;
+    gap: 2px;
+}
+.infosLine{
+
+}
+.gap4{
+    gap: 4px
+}
+.line{
+    background-color: #5A1BA9;
+    width: 2px;
+    height: 100%;
+}
+
+.money{
+    color: #00a100;
+    font-weight: 500;
 }

@@ -1,9 +1,16 @@
+import getProducts from "@salesforce/apex/SalesWinProdutos.getProducts";
 import searchProducts from "@salesforce/apex/SalesWinProdutos.searchProducts";
 import { LightningElement, api, track } from "lwc";
+
 
 export default class SalesWinProdutos extends LightningElement {
     @api recordId;
     term = ""; searchTimeout; @track produtos; selectedIndex = -1; 
+	loading = false;
+
+	connectedCallback(){
+		this.getProducts();
+	}
 
     handleInputChange(event) {
 		this.produtos = undefined;
@@ -80,4 +87,27 @@ export default class SalesWinProdutos extends LightningElement {
 		this.term = '';
 		this.produtos = undefined;
 	}
+
+	myProducts;
+	async getProducts(){
+		this.loading = true;
+		const prods = await getProducts({
+			oppId: this.recordId,
+		});
+
+		this.loading = false;
+		if(prods.length === 0) {
+			this.myProducts = undefined;
+			return;
+		}
+
+		prods.forEach(el => {
+			el.link = '/' + el.Id;
+		});
+
+		this.myProducts = prods;
+	}
+
+
+
 }

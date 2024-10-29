@@ -43,5 +43,22 @@ public with sharing class SalesWinProdutos {
 
     }
 
+    @AuraEnabled
+    public static List<QuoteLineItem> getProducts(String oppId){
+        
+        List<QuoteLineItem> itens = [
+            SELECT 
+                Id,
+                Product2.Name,
+                UnitPrice,
+                Quantity,
+                TotalPrice
+            FROM QuoteLineItem
+            where Quote.OpportunityId = :oppId
+        ];
+
+        return itens;
+    }
+
 
 }

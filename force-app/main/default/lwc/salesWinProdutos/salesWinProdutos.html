@@ -3,7 +3,7 @@
 
     <lightning-card  title="Produtos" icon-name="standard:products">
         <div class="main relative">
-            
+            <lightning-spinner if:true={loading} size="x-small"></lightning-spinner>
             <lightning-input 
                 type="text" 
                 value={term} 
@@ -20,17 +20,59 @@
                             <h2>
                                 {prod.Name}
                             </h2>
-                            <span>
-                                <lightning-formatted-number
-                                class="ptotal"
-                                value={prod.UnitPrice}
-                                maximum-fraction-digits="2"
-                                minimum-fraction-digits="0"
-                                ></lightning-formatted-number></p>
-                            </span>
+                            <div class="flexRow gap5">
+                                <span>R$</span>
+                                <span>
+                                    <lightning-formatted-number
+                                    class="ptotal"
+                                    value={prod.UnitPrice}
+                                    maximum-fraction-digits="2"
+                                    minimum-fraction-digits="0"
+                                    ></lightning-formatted-number>
+                                </span>
+                            </div>
+                           
                         </div>
                     </template>
                 </div>
+            </div>
+
+            <div class="flexColumn gap5">
+                <template if:true={myProducts} for:each={myProducts} for:item="my">
+                    <div class="flexRow gap" key={my.Id}>
+                        <div class="flexColumn alignCenter blockLines" >
+                            <lightning-icon icon-name="standard:products" size="small"></lightning-icon>
+                            <div class="line"></div>
+                        </div>
+                        <div class="flexColumn grow infosLine">
+                            <div class="flexRow gap4">
+                                <div class="grow">
+                                    <a href={my.link}>
+                                        <span>{my.Product2.Name}</span>
+                                    </a>
+                                </div>
+                                <lightning-icon icon-name="utility:edit" size="xx-small"></lightning-icon>
+                            </div>
+                            <div class="flexColumn">
+                                <div class="flexRow gap4">
+                                    R$ <lightning-formatted-number
+                                    value={my.UnitPrice}
+                                    maximum-fraction-digits="2"
+                                    minimum-fraction-digits="0"
+                                    ></lightning-formatted-number>
+                                    x {my.Quantity}
+                                </div>
+                                <div class="flexRow gap4 money">
+                                    R$ <lightning-formatted-number
+                                    value={my.TotalPrice}
+                                    maximum-fraction-digits="2"
+                                    minimum-fraction-digits="0"
+                                    ></lightning-formatted-number>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
             
             
