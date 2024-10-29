@@ -4,7 +4,27 @@
     <lightning-card  title="Produtos" icon-name="standard:products">
         <div class="main relative">
             
-            <lightning-input type="text" placeholder="Pesquisar..." variant="label-hidden"></lightning-input>
+            <lightning-input type="text" value={term} placeholder="Pesquisar..." variant="label-hidden" onchange={handleInputChange}></lightning-input>
+
+            <div class="boxResults" if:true={produtos}>
+                <div class="results flexColumn gap5">
+                    <template for:each={produtos} for:item="prod">
+                        <div key={prod.Id} class="flexColumn w100 gap5 itemBusca">
+                            <h2>
+                                {prod.Name}
+                            </h2>
+                            <span>
+                                <lightning-formatted-number
+                                class="ptotal"
+                                value={prod.UnitPrice}
+                                maximum-fraction-digits="2"
+                                minimum-fraction-digits="0"
+                                ></lightning-formatted-number></p>
+                            </span>
+                        </div>
+                    </template>
+                </div>
+            </div>
             
             
         </div>

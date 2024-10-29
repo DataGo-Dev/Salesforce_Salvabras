@@ -8,9 +8,44 @@
     background-color: white;
     border-radius: 10px;
 }
+.boxResults{
+    overflow: hidden;
+    padding: 15px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+   
+}
+.results{
+    overflow: auto;
+    border: solid 1px #d9d9d9;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 4px 6px rgba(100, 73, 73, 0.1); 
+    max-height: 230px; 
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
 .flexRow{
     display: flex;
     flex-direction: row;
+}
+h2{
+    font-size: 16px;
+    font-weight: bold;
+}
+.itemBusca{
+    padding: 7px;
+    border-radius: 7px;
+}
+.itemBusca:hover{
+    background-color: #5A1BA9;
+    color: white;
 }
 
 .flexColumn{

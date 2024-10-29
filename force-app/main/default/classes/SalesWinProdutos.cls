@@ -2,7 +2,7 @@ public with sharing class SalesWinProdutos {
    
 
     @AuraEnabled
-    public static List<PricebookEntry> searchProducts(String recordId,String term){
+    public static List<PricebookEntry> searchProducts(String recordId ,String term){
 
         term = term.replace(' ', '%');
 
@@ -18,9 +18,11 @@ public with sharing class SalesWinProdutos {
                 where id = :recordId limit 1
         ];
 
+        String pricebookId = opp.Pricebook2Id;
+
         List<PricebookEntry> prods = [
             SELECT 
-                id, 
+                Id, 
                 Name,
                 ProductCode,
                 UnitPrice
@@ -32,6 +34,7 @@ public with sharing class SalesWinProdutos {
                     ProductCode like :finalTerm
                 )
                 and IsActive = true
+                and Pricebook2Id = :pricebookId
             limit 100
         ];
 
