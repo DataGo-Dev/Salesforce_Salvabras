@@ -55,6 +55,7 @@ public with sharing class SalesWinProdutos {
                 TotalPrice
             FROM QuoteLineItem
             where Quote.OpportunityId = :oppId
+            and Quote.IsSyncing = true
         ];
 
         return itens;
