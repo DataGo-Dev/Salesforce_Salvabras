@@ -1,0 +1,52 @@
+.main {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+}
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.gap{
+    gap: 10px
+}
+.gap5{
+    gap: 5px
+}
+.justCenter{
+    justify-content: center;
+}
+.alignCenter{
+    align-items: center;
+}
+.aligneEnd{
+    align-items: end;
+}
+.justEnd{
+    justify-content: end;
+}
+.grow{
+    flex-grow: 1;
+}
+.wrap{
+    flex-wrap: wrap;
+}
+.relative{
+    position: relative;
+}
+.w100{
+    width: 100%;
+}
+.w50{
+    width: 50%;
+}
