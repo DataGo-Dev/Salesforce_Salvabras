@@ -36,7 +36,8 @@ public with sharing class SalesWinProdutos {
                 Id, 
                 Name,
                 ProductCode,
-                UnitPrice
+                UnitPrice,
+                Product2Id
             From 
                 PricebookEntry
             where 
@@ -52,6 +53,14 @@ public with sharing class SalesWinProdutos {
         return prods;
 
 
+    }
+
+    @AuraEnabled
+    public static Product2 getProductInfos(String productId){
+        return [
+            Select Id, MinimumQuantity__c
+            from product2 where Id = :productId limit 1
+        ];
     }
 
     @AuraEnabled

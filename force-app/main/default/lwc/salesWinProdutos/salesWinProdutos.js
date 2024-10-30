@@ -5,12 +5,12 @@ import { LightningElement, api, track } from "lwc";
 import * as helper from 'c/helper';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { RefreshEvent } from "lightning/refresh";
-
+import ProdutoModal from "c/salesWinProdutoModal";
 
 export default class SalesWinProdutos extends LightningElement {
     @api recordId;
     isMobile;
-    term = ""; searchTimeout; @track produtos; selectedIndex = -1; 
+    term = ""; searchTimeout; @track entrys; selectedIndex = -1; 
 	loading = false;
 
 
@@ -21,7 +21,7 @@ export default class SalesWinProdutos extends LightningElement {
 	}
 
     handleInputChange(event) {
-		this.produtos = undefined;
+		this.entrys = undefined;
 
         this.term = event.target.value.trim();
         clearTimeout(this.searchTimeout);
@@ -42,11 +42,11 @@ export default class SalesWinProdutos extends LightningElement {
 		});
 
 		if(prods.length === 0) {
-			this.produtos = undefined;
+			this.entrys = undefined;
 			return;
 		}
 		
-		this.produtos = prods;
+		this.entrys = prods;
     }
 
 	handleKeyDown(event) {
@@ -55,7 +55,7 @@ export default class SalesWinProdutos extends LightningElement {
 
         if (key === 'ArrowDown') {
             event.preventDefault(); 
-            if (this.selectedIndex < this.produtos.length - 1) {
+            if (this.selectedIndex < this.entrys.length - 1) {
                 this.selectedIndex++;
                 this.updateSelection();
             }
@@ -68,7 +68,7 @@ export default class SalesWinProdutos extends LightningElement {
         } else if (key === 'Enter') {
             event.preventDefault();
             if (this.selectedIndex > -1) {
-			   const selectedItem = this.produtos[this.selectedIndex];
+			   const selectedItem = this.entrys[this.selectedIndex];
 			   const evt ={ 
 					currentTarget: { 
 						dataset: { id: selectedItem.Id} 
@@ -92,8 +92,32 @@ export default class SalesWinProdutos extends LightningElement {
     }
 
 	hanldleClickItem(event){
-		this.term = '';
-		this.produtos = undefined;
+
+        const id = event.currentTarget.dataset.id;
+        const myEntry = this.entrys.find(x => x.Id === id);
+
+        const record = {
+            'Product2Id': myEntry.Product2Id,
+            'ListPrice': myEntry.UnitPrice,
+            'TipoOperacao__c' : "",
+            'Quantity': 1,
+            'UnitPrice': myEntry.UnitPrice,
+            'Discount':  0.0,
+            'PricebookEntryId': myEntry.Id,
+            'Discount': 0.0,
+            'QuoteId': this.recordId
+        };
+
+        ProdutoModal.open({
+            size: 'medium',
+            record: record
+        }).then(el=>{
+
+        });
+
+
+        this.term = '';
+		this.entrys = undefined;
 	}
 
 	myProducts;

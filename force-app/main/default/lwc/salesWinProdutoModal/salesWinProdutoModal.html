@@ -1,0 +1,86 @@
+<template>
+
+
+    <div class="main">
+
+            <div class="log" if:true={msg}>
+
+            </div>
+      
+            <lightning-record-edit-form if:false={recordId} class="w100"
+                onsubmit={handleSubmit}
+                object-api-name="QuoteLineItem">
+
+                <div class="flexRow wrap">
+                    <template if:true={fields} for:each={fields} for:item="item">
+
+                    
+                        <div key={item.fieldName} class="flexWidth" if:false={item.hide}>
+                            <lightning-input-field 
+                                field-name={item.fieldName}
+                                required={item.required} 
+                                disabled={item.disabled} 
+                                read-only={item.disabled} 
+                                value={item.value}
+                                data-field={item.fieldName}
+                            ></lightning-input-field>
+                        </div>
+
+                        <div key={item.fieldName} class="dnone" if:true={item.hide}>
+                            <lightning-input-field 
+                                field-name={item.fieldName}
+                                required={item.required} 
+                                disabled={item.disabled} 
+                                read-only={item.disabled} 
+                                value={item.value}
+                                data-field={item.fieldName}
+                            ></lightning-input-field>
+                        </div>
+
+                    </template>
+                </div>
+                <div class="flexRow gap justEnd">
+                    <lightning-button variant="brand" type="submit" label={fraseBtn}></lightning-button>
+                </div>    
+                
+            </lightning-record-edit-form>
+
+
+            <lightning-record-edit-form if:true={recordId} class="w100"
+                onsubmit={handleSubmit}
+                object-api-name="QuoteLineItem" record-id={recordId}>
+                <div class="flexRow wrap">
+
+                    <template if:true={fields} for:each={fields} for:item="item">
+                        <div key={item.fieldName} class="flexWidth" if:false={item.hide}>
+                            <lightning-input-field 
+                                field-name={item.fieldName}
+                                required={item.required} 
+                                disabled={item.disabled} 
+                                read-only={item.disabled} 
+                                value={item.value}
+                                data-field={item.fieldName}
+                            ></lightning-input-field>
+                        </div>
+
+                        <div key={item.fieldName} class="dnone" if:true={item.hide}>
+                            <lightning-input-field 
+                                field-name={item.fieldName}
+                                required={item.required} 
+                                disabled={item.disabled} 
+                                read-only={item.disabled} 
+                                value={item.value}
+                                data-field={item.fieldName}
+                            ></lightning-input-field>
+                        </div>
+
+                    </template>
+                </div>
+                <div class="flexRow gap justEnd">
+                    <lightning-button variant="brand" type="submit" label={fraseBtn}></lightning-button>
+                </div>    
+            </lightning-record-edit-form>
+
+           
+        </div>
+</template>

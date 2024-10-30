@@ -13,9 +13,9 @@
                 onkeydown={handleKeyDown}>
             </lightning-input>
 
-            <div class="boxResults" if:true={produtos}>
+            <div class="boxResults" if:true={entrys}>
                 <div class="results flexColumn gap5">
-                    <template for:each={produtos} for:item="prod">
+                    <template for:each={entrys} for:item="prod">
                         <div key={prod.Id} class="flexColumn w100 gap5 itemBusca" onclick={hanldleClickItem} data-id={prod.Id}>
                             <h2>
                                 {prod.Name}
