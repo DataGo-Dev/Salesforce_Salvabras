@@ -26,6 +26,7 @@ export default class SalesWinProdutoModal extends LightningModal {
         const myRecord = helper.keysToLower(this.record);
 
         this.fields.forEach(field => {
+            field.class = field.hide ? 'dnone' : 'flexWidth';
             field.value = myRecord[field.fieldName.toLowerCase()];
         });
 
@@ -45,6 +46,7 @@ export default class SalesWinProdutoModal extends LightningModal {
             const {MinimumQuantity__c} = this.productInfos;            
             if(MinimumQuantity__c){
                 const remainder = value % MinimumQuantity__c;
+                
                 if(remainder !== 0){
                     this.msg = `A Quantidade deve ser múltipla de ${MinimumQuantity__c}`;
                     return;
@@ -57,6 +59,10 @@ export default class SalesWinProdutoModal extends LightningModal {
 
     get fraseBtn(){
         return this.recordId ? 'Salvar' : 'Adicionar';
+    }
+
+    get disableBtn(){
+        return this.msg ? true : false;
     }
 
 }
