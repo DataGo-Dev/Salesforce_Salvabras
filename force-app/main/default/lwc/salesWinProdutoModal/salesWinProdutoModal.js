@@ -35,27 +35,25 @@ export default class SalesWinProdutoModal extends LightningModal {
 
     }
 
-    handleSubmit(event){
-        event.preventDefault();  
+    handleChange(event){
+        this.msg = undefined;
 
-        const fields = event.detail.fields;
+        const fieldName = event.currentTarget.dataset.field.toLowerCase();
+        const value = event.target.value;
         
-        const { Quantity } = fields;
-        const {MinimumQuantity__c} = this.productInfos;
-        if(MinimumQuantity__c){
-
-            const remainder = Quantity % MinimumQuantity__c;
-            if(remainder !== 0){
-                this.msg = "A Quantidade mínima";
-                return;
+        if(fieldName === 'quantity'){
+            const {MinimumQuantity__c} = this.productInfos;            
+            if(MinimumQuantity__c){
+                const remainder = value % MinimumQuantity__c;
+                if(remainder !== 0){
+                    this.msg = `A Quantidade deve ser múltipla de ${MinimumQuantity__c}`;
+                    return;
+                }
             }
-
+    
         }
 
-        
-        this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
-
 
     get fraseBtn(){
         return this.recordId ? 'Salvar' : 'Adicionar';
