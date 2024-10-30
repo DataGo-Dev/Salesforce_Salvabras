@@ -1,16 +1,20 @@
 import { api, track } from "lwc";
 import LightningModal from 'lightning/modal';
 import getPricebooks from '@salesforce/apex/SalesWin.getPricebooks';
-import { NavigationMixin } from "lightning/navigation";
+import saveOpp from "@salesforce/apex/SalesWin.saveOpp";
 
 
 export default class SalesWin extends LightningModal {
 
-    @api recordId; pricebooks; @track values = {sobjectType:'Opportunity'}; loading=false; msg;
+    @api recordId; 
+    
+    pricebooks; @track values = {sobjectType:'Opportunity'}; loading=false; msg;
     async connectedCallback(){     
         this.setLoading(true); 
         this.pricebooks = await getPricebooks({recordId: this.recordId});
         this.setLoading(false);
+
+        this.values.AccountId = this.recordId;
     }
     handleSelectValue(event){
         const value =  event.detail.value || event.target.value; 
@@ -18,8 +22,27 @@ export default class SalesWin extends LightningModal {
         this.values[key] = value;  
     }
 
-    async continueToOpp(){
+    async saveOpp(){
+        this.msg = undefined;
+        
+        this.setLoading(true);
+        await saveOpp({opp: this.values}).then(resp => {
+            
+            const link = `${window.location.origin}/${resp}`;
+            const result = {
+                ok: true,
+                link: link,
+                id: resp
+            }
+    
+            this.close(result);
 
+        }).catch(err=>{
+            this.msg = this.findMessage(err);
+        });
+
+
+        this.setLoading(false);
 
     
     }
@@ -31,46 +54,43 @@ export default class SalesWin extends LightningModal {
 
 
 
+    findMessage(obj) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (key === 'message') {
+                    return obj[key];
+                } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    const result = this.findMessage(obj[key]); 
+                    if (result) {
+                        return result;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     get disableSave(){
-        const {Pricebook2Id} = this.values;
+        const {Name, Pricebook2Id, StageName, CloseDate} = this.values;
 
         const isValid = (value) => {
             return value && value.trim() !== '';
         };
-        return !isValid(Pricebook2Id) 
-    }
-
-
-    // get disableSave(){
-    //     const {Name, Pricebook2Id, StageName, CloseDate} = this.values;
-
-    //     const isValid = (value) => {
-    //         return value && value.trim() !== '';
-    //     };
     
 
-    //     return !isValid(Name) 
-    //         || !isValid(Pricebook2Id) 
-    //         || !isValid(StageName) 
-    //         || !isValid(CloseDate);
-    // }
+        return !isValid(Name) 
+            || !isValid(Pricebook2Id) 
+            || !isValid(StageName) 
+            || !isValid(CloseDate);
+    }
 
+    closeModal(){
+        this.close();
+    }
 
-    // findMessage(obj) {
-    //     for (const key in obj) {
-    //         if (obj.hasOwnProperty(key)) {
-    //             if (key === 'message') {
-    //                 return obj[key];
-    //             } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-    //                 const result = this.findMessage(obj[key]); 
-    //                 if (result) {
-    //                     return result;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return null;
+    // get isMobile() {
+    //     return /SalesforceMobile/i.test(window.navigator.userAgent);
     // }
 
 }

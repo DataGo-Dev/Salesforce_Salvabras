@@ -1,10 +1,10 @@
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getPricebooks from '@salesforce/apex/SalesWin.getPricebooks';
-import { NavigationMixin } from "lightning/navigation";
-import { encodeDefaultFieldValues } from "lightning/pageReferenceUtils";
 import getOpps from "@salesforce/apex/SalesWin.getOpps";
 import * as helper from 'c/helper';
+import newOppModal from "c/salesWinNewOpp";
+import { NavigationMixin } from "lightning/navigation";
 
 export default class SalesWinHome extends NavigationMixin(LightningElement) {
 
@@ -43,32 +43,23 @@ export default class SalesWinHome extends NavigationMixin(LightningElement) {
         this.pricebookValue = value;  
     }
 
-    showNewAla = false;
-    handleClickNew(){
-        this.showNewAla = !this.showNewAla;
-        this.pricebookValue = undefined;   
-    }
-
-    continueToOpp(){
-
-        const defaultValues = encodeDefaultFieldValues({
-            Pricebook2Id: this.pricebookValue,
-            StageName: 'Orçamento',
-            AccountId: this.recordId
-        });
-    
-    
-        this[NavigationMixin.Navigate]({
-                type: "standard__objectPage",
+    handleClickNew(){ 
+        newOppModal.open({
+            size: "small",
+            recordId: this.recordId
+        }).then(async (result) => {
+            if (result?.ok) {
+              this.showToast("Sucesso", "Registro gravado com sucesso!", "success");
+              this[NavigationMixin.Navigate]({
+                type: "standard__recordPage",
                 attributes: {
-                objectApiName: "Opportunity",
-                actionName: "new",
-            },
-            state: {
-                defaultFieldValues: defaultValues,
-            },
-        });
-
+                    recordId: result.id,
+                    objectApiName: "Opportunity",
+                    actionName: "view"
+                }
+            });
+            }
+          });
     }
 
 
@@ -86,6 +77,9 @@ export default class SalesWinHome extends NavigationMixin(LightningElement) {
     get disableSave(){
         return this.pricebookValue === undefined;
     }
+
+
+
 
 
 }

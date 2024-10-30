@@ -1,15 +1,23 @@
+import deleteItens from "@salesforce/apex/SalesWinProdutos.deleteItens";
 import getProducts from "@salesforce/apex/SalesWinProdutos.getProducts";
 import searchProducts from "@salesforce/apex/SalesWinProdutos.searchProducts";
 import { LightningElement, api, track } from "lwc";
+import * as helper from 'c/helper';
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { RefreshEvent } from "lightning/refresh";
 
 
 export default class SalesWinProdutos extends LightningElement {
     @api recordId;
+    isMobile;
     term = ""; searchTimeout; @track produtos; selectedIndex = -1; 
 	loading = false;
 
+
 	connectedCallback(){
 		this.getProducts();
+
+        this.isMobile = /SalesforceMobile/i.test(window.navigator.userAgent);
 	}
 
     handleInputChange(event) {
@@ -92,7 +100,7 @@ export default class SalesWinProdutos extends LightningElement {
 	async getProducts(){
 		this.loading = true;
 		const prods = await getProducts({
-			oppId: this.recordId,
+			recordId: this.recordId,
 		});
 
 		this.loading = false;
@@ -109,5 +117,46 @@ export default class SalesWinProdutos extends LightningElement {
 	}
 
 
+    async deleteItem(event){
+
+     
+        if(this.isMobile){
+            const confirm = window.confirm('Deletar esse item?');
+            if(!confirm){return;}
+        }
+
+        this.loading=true;
+        const produto = event.currentTarget.dataset.id;
+        const lst = [produto];
+        await deleteItens({
+            ids: lst
+        }).then(el=>{
+            this.getProducts();
+            this.handleRefreshView();
+        })
+        .catch(err=>{
+            const msg = helper.findMessage(err);
+            this.showToast('Erro', msg, 'error');
+        });
+
+        this.loading=false;
+        
+    }
+
+
+    showToast(title, message, variant) {
+        this.dispatchEvent(
+          new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant
+          })
+        );
+    }
+
+
+    handleRefreshView() {
+        this.dispatchEvent(new RefreshEvent());
+    }
 
 }

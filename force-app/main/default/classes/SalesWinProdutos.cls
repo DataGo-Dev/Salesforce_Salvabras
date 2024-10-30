@@ -1,4 +1,15 @@
 public with sharing class SalesWinProdutos {
+
+    @AuraEnabled
+    public static void deleteItens(List<String> ids){
+        List<QuoteLineItem> itens = new List<QuoteLineItem>();
+        
+        for(String id : ids){
+            itens.add(new QuoteLineItem(Id=id));
+        }
+        
+        delete itens;
+    }
    
 
     @AuraEnabled
@@ -11,14 +22,14 @@ public with sharing class SalesWinProdutos {
             }
         );
 
-        Opportunity opp = [
+        Quote quote = [
             SELECT 
                 id, 
-                Pricebook2Id from Opportunity 
+                Pricebook2Id from Quote 
                 where id = :recordId limit 1
         ];
 
-        String pricebookId = opp.Pricebook2Id;
+        String pricebookId = quote.Pricebook2Id;
 
         List<PricebookEntry> prods = [
             SELECT 
@@ -44,7 +55,7 @@ public with sharing class SalesWinProdutos {
     }
 
     @AuraEnabled
-    public static List<QuoteLineItem> getProducts(String oppId){
+    public static List<QuoteLineItem> getProducts(String recordId){
         
         List<QuoteLineItem> itens = [
             SELECT 
@@ -54,8 +65,7 @@ public with sharing class SalesWinProdutos {
                 Quantity,
                 TotalPrice
             FROM QuoteLineItem
-            where Quote.OpportunityId = :oppId
-            and Quote.IsSyncing = true
+            where QuoteId = :recordId
         ];
 
         return itens;

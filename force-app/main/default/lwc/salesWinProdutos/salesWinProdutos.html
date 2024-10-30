@@ -47,11 +47,11 @@
                         <div class="flexColumn grow infosLine">
                             <div class="flexRow gap4">
                                 <div class="grow">
-                                    <a href={my.link}>
-                                        <span>{my.Product2.Name}</span>
-                                    </a>
+                                    <p class="brandh3">
+                                        {my.Product2.Name}
+                                    </p>
                                 </div>
-                                <lightning-icon icon-name="utility:edit" size="xx-small"></lightning-icon>
+                                <lightning-icon icon-name="utility:delete" size="xx-small" data-id={my.Id} onclick={deleteItem}></lightning-icon>
                             </div>
                             <div class="flexColumn">
                                 <div class="flexRow gap4">

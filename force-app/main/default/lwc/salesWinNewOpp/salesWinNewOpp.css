@@ -12,6 +12,11 @@ h2{
     font-weight: bold;
     font-size: 14px;
 }
+.horline{
+    background-color: #FF5D2D;
+    flex-grow: 1;
+    height: 2px;
+}
 .redspan{
     color: red;
 }

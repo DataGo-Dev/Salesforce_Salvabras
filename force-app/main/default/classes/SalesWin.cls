@@ -76,8 +76,10 @@ public with sharing class SalesWin {
 
 
     @AuraEnabled
-    public static void saveOpp(Opportunity opp){
+    public static String saveOpp(Opportunity opp){
         upsert opp; 
+
+        return opp.Id;
     }
 
 
