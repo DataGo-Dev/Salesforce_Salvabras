@@ -76,6 +76,10 @@ export default class SalesWinProdutos extends LightningElement {
 				}
                this.hanldleClickItem(evt);
             }
+        }else if (key === 'Escape') {
+            this.selectedIndex = -1;
+            this.entrys = undefined;
+            this.term = '';
         }
     }
 
