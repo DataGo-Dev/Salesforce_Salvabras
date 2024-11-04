@@ -54,6 +54,7 @@ export default class SalesWinProdutoModal extends LightningModal {
         this.fields.forEach(field => {
             const fieldName = field.fieldName.toLowerCase();
             const value = field.value;
+            if(!value){return;}
 
             if (fieldName === 'quantity') {
                 const { MinimumQuantity__c } = this.productInfos.produto;
@@ -78,6 +79,7 @@ export default class SalesWinProdutoModal extends LightningModal {
     
         const fieldName = event.currentTarget.dataset.field.toLowerCase();
         const value = event.target.value;
+
         const finded = this.fields.find((element) => element.fieldName.toLowerCase() === fieldName);
         finded.value = value;
         this.validateFields();
