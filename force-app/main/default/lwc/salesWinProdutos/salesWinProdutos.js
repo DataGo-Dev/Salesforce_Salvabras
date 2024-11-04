@@ -110,8 +110,14 @@ export default class SalesWinProdutos extends LightningElement {
 
         ProdutoModal.open({
             size: 'medium',
-            record: record
+            record: record,
+            product2id:  myEntry.Product2Id
         }).then(el=>{
+            
+            if(el?.ok){
+                this.showToast('Sucesso', 'Item adicionado com sucesso!', 'success');
+                this.getProducts();
+            }
 
         });
 
@@ -119,6 +125,25 @@ export default class SalesWinProdutos extends LightningElement {
         this.term = '';
 		this.entrys = undefined;
 	}
+
+    handleEdit(event){
+        const id = event.currentTarget.dataset.id;
+        const product2id = event.currentTarget.dataset.productid;
+        console.log(id);
+        
+        ProdutoModal.open({
+            size: 'medium',
+            recordId: id,
+            product2id: product2id
+        }).then(el=>{
+            
+            if(el?.ok){
+                this.getProducts();
+            }
+
+        });
+        
+    }
 
 	myProducts;
 	async getProducts(){

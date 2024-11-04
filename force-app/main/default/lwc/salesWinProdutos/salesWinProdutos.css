@@ -116,4 +116,5 @@ h2{
 .brandh3{
     color: var(--lwc-brandAccessibleActive);
     font-weight: 500;
+    cursor: pointer;
 }

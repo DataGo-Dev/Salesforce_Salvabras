@@ -3,22 +3,29 @@
 
     <div class="main">
 
+            <div class="flexRow gap alignCenter">
+                <lightning-icon icon-name="standard:products" size="small"></lightning-icon>
+                <h2>{productName}</h2>
+                <div class="horline"></div>
+            </div>
+
             <div class="log" if:true={msg}>
                 {msg}
             </div>
       
             <lightning-record-edit-form class="w100"
                 onsubmit={handleSubmit}
+                onsuccess={handleSuccess}
+                onerror={handleError}
                 object-api-name="QuoteLineItem" record-id={recordId}>
                 <div class="flexRow wrap">
 
                     <template if:true={fields} for:each={fields} for:item="item">
                         <div key={item.fieldName} class={item.class}>
                             <lightning-input-field 
+                                key={item.fieldName}
                                 field-name={item.fieldName}
                                 required={item.required} 
-                                disabled={item.disabled} 
-                                read-only={item.disabled} 
                                 value={item.value}
                                 data-field={item.fieldName}
                                 onchange={handleChange}

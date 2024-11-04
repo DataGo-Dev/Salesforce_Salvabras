@@ -3,6 +3,9 @@
     position: relative;
     background-color: white;
     border-radius: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 .flexRow{
     display: flex;
@@ -62,6 +65,12 @@
     background-color: red;
     color: white;
     border-radius: 7px;
+}
+
+.horline{
+    background-color: #5A1BA9;
+    flex-grow: 1;
+    height: 2px;
 }
 
 

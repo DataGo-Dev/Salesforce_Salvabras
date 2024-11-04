@@ -56,11 +56,20 @@ public with sharing class SalesWinProdutos {
     }
 
     @AuraEnabled
-    public static Product2 getProductInfos(String productId){
-        return [
-            Select Id, MinimumQuantity__c
+    public static Map<String,Object> getProductInfos(String productId){
+
+        Controle_Produto__c conPro = Controle_Produto__c.getOrgDefaults();
+
+        Product2 pro = [
+            Select Id, MinimumQuantity__c, Name
             from product2 where Id = :productId limit 1
         ];
+
+
+        Map<String,Object> obj = new Map<String,Object>();
+        obj.put('controleProduto', conPro);
+        obj.put('produto', pro);
+        return obj;
     }
 
     @AuraEnabled
