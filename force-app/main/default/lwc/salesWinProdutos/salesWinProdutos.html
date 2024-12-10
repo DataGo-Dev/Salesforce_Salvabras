@@ -3,6 +3,7 @@
 
     <!-- <lightning-card  title="Produtos" icon-name="standard:products"> -->
         <div class="main relative">
+            
             <lightning-spinner if:true={loading} size="x-small"></lightning-spinner>
             <lightning-input 
                 type="text" 
@@ -49,9 +50,13 @@
                 </div>
             </div>
 
-            <div class="flexColumn gap5">
-                <template if:true={myProducts} for:each={myProducts} for:item="my">
-                    <div class="flexRow gap" key={my.Id}>
+            <div class="flexColumn gap" if:true={myProducts}>
+                <div class="flexRow gap5 justEnd grow alignCenter">
+                   <lightning-button size="xx-small" icon-name="utility:delete" label="Limpar" variant="brand" onclick={deleteAllItens}></lightning-button>
+                </div>
+
+                <template for:each={myProducts} for:item="my">
+                    <div class="flexRow gap myItem" key={my.Id}>
                         <div class="flexColumn alignCenter blockLines" >
                             <!-- <lightning-icon icon-name="standard:products" size="small"></lightning-icon>
                             <div class="line"></div> -->
