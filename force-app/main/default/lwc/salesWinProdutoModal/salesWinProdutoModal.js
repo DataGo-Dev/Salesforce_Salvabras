@@ -36,13 +36,20 @@ export default class SalesWinProdutoModal extends LightningModal {
             return;
         }
 
+        const recordDeepCopy = JSON.parse(JSON.stringify(this.record));
       
-        const myRecord = helper.keysToLower(this.record);
+        const { MinimumQuantity__c } = this.productInfos.produto;
+        if(MinimumQuantity__c){
+            recordDeepCopy.Quantity = MinimumQuantity__c;
+        }
+
+        const myRecord = helper.keysToLower(recordDeepCopy);
         fields.forEach(field => {
             field.class = field.hide ? 'dnone' : 'flexWidth';
             field.value = myRecord[field.fieldName.toLowerCase()];
         });
         this.fields = fields;
+
 
         this.validateFields();
         this.loading = false;
