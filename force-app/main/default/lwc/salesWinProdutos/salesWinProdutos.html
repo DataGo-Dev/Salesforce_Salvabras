@@ -1,7 +1,7 @@
 <template>
 
 
-    <lightning-card  title="Produtos" icon-name="standard:products">
+    <!-- <lightning-card  title="Produtos" icon-name="standard:products"> -->
         <div class="main relative">
             <lightning-spinner if:true={loading} size="x-small"></lightning-spinner>
             <lightning-input 
@@ -17,19 +17,31 @@
                 <div class="results flexColumn gap5">
                     <template for:each={entrys} for:item="prod">
                         <div key={prod.Id} class="flexColumn w100 gap5 itemBusca" onclick={hanldleClickItem} data-id={prod.Id}>
-                            <h2>
-                                {prod.Name}
-                            </h2>
+
                             <div class="flexRow gap5">
-                                <span>R$</span>
-                                <span>
-                                    <lightning-formatted-number
-                                    class="ptotal"
-                                    value={prod.UnitPrice}
-                                    maximum-fraction-digits="2"
-                                    minimum-fraction-digits="0"
-                                    ></lightning-formatted-number>
-                                </span>
+
+                                <img 
+                                    src={prod.Product2.DisplayUrl} 
+                                    alt={prod.Product2.Name} 
+                                    class="image">
+    
+                                <div class="flexColumn gap5">
+                                    <h2>
+                                        {prod.Name}
+                                    </h2>
+                                    <div class="flexRow gap5">
+                                        <span>R$</span>
+                                        <span>
+                                            <lightning-formatted-number
+                                            class="ptotal"
+                                            value={prod.UnitPrice}
+                                            maximum-fraction-digits="2"
+                                            minimum-fraction-digits="0"
+                                            ></lightning-formatted-number>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
                            
                         </div>
@@ -41,8 +53,13 @@
                 <template if:true={myProducts} for:each={myProducts} for:item="my">
                     <div class="flexRow gap" key={my.Id}>
                         <div class="flexColumn alignCenter blockLines" >
-                            <lightning-icon icon-name="standard:products" size="small"></lightning-icon>
-                            <div class="line"></div>
+                            <!-- <lightning-icon icon-name="standard:products" size="small"></lightning-icon>
+                            <div class="line"></div> -->
+                            <img 
+                                src={my.Product2.DisplayUrl} 
+                                alt={my.Product2.Name} 
+                                class="image">
+
                         </div>
                         <div class="flexColumn grow infosLine">
                             <div class="flexRow gap4">
@@ -77,7 +94,7 @@
             
             
         </div>
-    </lightning-card>
+    <!-- </lightning-card> -->
 
    
 

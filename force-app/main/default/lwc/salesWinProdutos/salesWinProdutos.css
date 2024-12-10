@@ -20,6 +20,10 @@
    
 }
 
+.image{
+    height: 70px;
+}
+
 lightning-icon{
     cursor: pointer;
 }
