@@ -1,4 +1,5 @@
 public with sharing class SalesWinProdutos {
+    public static String imgNotFound = 'https://i.ibb.co/yRSYRpX/no-image-icon-23485.png'; //https://ibb.co/7z4RzQX
 
     @AuraEnabled
     public static void deleteItens(List<String> ids){
@@ -37,7 +38,8 @@ public with sharing class SalesWinProdutos {
                 Name,
                 ProductCode,
                 UnitPrice,
-                Product2Id
+                Product2Id,
+                Product2.DisplayUrl
             From 
                 PricebookEntry
             where 
@@ -49,6 +51,13 @@ public with sharing class SalesWinProdutos {
                 and Pricebook2Id = :pricebookId
             limit 100
         ];
+
+
+        for(PricebookEntry o : prods){
+            if(o.product2.DisplayUrl == null){
+                o.product2.DisplayUrl = imgNotFound;
+            }
+        }
 
         return prods;
 
@@ -81,10 +90,18 @@ public with sharing class SalesWinProdutos {
                 Product2.Name,
                 UnitPrice,
                 Quantity,
-                TotalPrice
+                TotalPrice,
+                Product2.DisplayUrl
             FROM QuoteLineItem
             where QuoteId = :recordId
         ];
+
+        for(QuoteLineItem o : itens){
+            if(o.product2.DisplayUrl == null){
+                o.product2.DisplayUrl = imgNotFound;
+            }
+        }
+
 
         return itens;
     }

@@ -181,6 +181,13 @@ export default class SalesWinProdutos extends LightningElement {
         this.loading=true;
         const produto = event.currentTarget.dataset.id;
         const lst = [produto];
+        await this.deleteAction(lst);
+        this.loading=false;
+        
+    }
+
+    async deleteAction(lst){
+
         await deleteItens({
             ids: lst
         }).then(el=>{
@@ -192,8 +199,18 @@ export default class SalesWinProdutos extends LightningElement {
             this.showToast('Erro', msg, 'error');
         });
 
+    }
+
+    async deleteAllItens(event){
+
+        const confirm = window.confirm('Deletar todos os itens?');
+        if(!confirm){return;}
+        this.loading=true;
+        const myIds = this.myProducts.map(x => (x.Id));
+
+        await this.deleteAction(myIds);
         this.loading=false;
-        
+
     }
 
 
