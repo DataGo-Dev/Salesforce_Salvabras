@@ -133,7 +133,7 @@
        </tr>
 
        <tr> 
-      <td>   <apex:image width="150px" value="/resource/salvabrasLogo/logoSalva.png" />  </td>
+      <td>   <apex:image width="200px" value="/resource/salvabrasLogo/logoSalva.png" />  </td>
 
          
     <td style="vertical-align:middle; padding-left: 20px;">
@@ -179,7 +179,7 @@
                   <apex:param value="{!Quote.CreatedDate}" />
                </apex:outputText></span> </td>
 
-            <td class="minSize"> <b>Telefone</b> </td>   
+            <td class="minSize"> <b>Telefone</b></td>   
         </tr>
 
         <tr>   
@@ -188,7 +188,7 @@
         </tr>
 
         <tr>
-           <td class="minSize"> <b>Email:</b> </td>
+           <td class="minSize"> <b>Email:</b></td>
         </tr>
 
    </table>
@@ -210,7 +210,7 @@
        </tr>
 
        <tr>  
-          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 40px;"> {!Quote.Account.RamoAtividadeConta__c} </span> </td>
+          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 40px;"> {!Quote.Account.Canal__c} </span> </td>
             <td class="minSize"> <b> Email: </b> <span style="padding-left: 40px;"> {!Quote.Account.Email__c} </span> </td>
        </tr>
 
@@ -348,7 +348,7 @@
              <td class="alignR" colspan="4"> DESCONTO </td>
 
 
-             <td class="alignL" style="width:23%;padding-left:16px" ><apex:outputText value="{0, number, ###,##0}">
+             <td class="alignL" style="width:23%;padding-left:32px" ><apex:outputText value="{0, number, ###,##0}">
                 <apex:param value="{!Quote.Discount}" />
             </apex:outputText>%</td>  
 
@@ -421,7 +421,7 @@
        </tr>
 
        <tr> 
-      <td>   <apex:image width="180px" value="/resource/salvabrasLogo/logoSalva.png" />  </td>
+      <td>   <apex:image width="200px" value="/resource/salvabrasLogo/logoSalva.png" />  </td>
 
          
     <td style="vertical-align:middle; padding-left: 20px;">
@@ -449,7 +449,7 @@
         </tr>     
 
 
-        <table style="margin-top:30px">  
+        <table style="margin-top:40px">  
               <tr class="minSize"> 
                     <td> &nbsp;&bull; Qualquer tratativa referente a proposta deverá ser formalizada por e-mail.<br/>
     &nbsp;&bull; Atenção aos produtos que são enviados por caixa, as especificações <b> ALTURA, LARGURA</b> e <b>COMPRIMENTO</b> são da caixa.<br/>
@@ -476,12 +476,9 @@
        </td>
               </tr>
         </table>
-
    
    </table>
-   
-   
- 
+    
    </body>
 
 
