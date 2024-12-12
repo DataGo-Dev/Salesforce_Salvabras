@@ -168,28 +168,31 @@
        </tr>
 
         <tr class="">  
-           <td class="minSize"> <b>Número cotação:</b> <span style="padding-left: 40px;">{!Quote.QuoteNumber}</span> </td>
+           
+         <td class="minSize"> <b> Representante: </b>  <span style="padding-left: 28px;">{!Quote.Account.Representante__r.Name}</span>  </td>
+         
+           <td class="minSize"> <b>Telefone:</b> <span style="padding-left: 12px;">{!Quote.Account.Representante__r.Phone}</span> </td>   
 
-           <td class="bold2"> Criado por: </td>
-           <td class="minSize">{!Quote.Opportunity.OwnerId}</td>
+     
         </tr>
 
         <tr>
-           <td  class="minSize"> <b> Data: </b>  <span style="padding-left: 40px;"><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
-                  <apex:param value="{!Quote.CreatedDate}" />
-               </apex:outputText></span> </td>
+             <td class="minSize"> <b>Número cotação:</b> <span style="padding-left: 17px;">{!Quote.QuoteNumber}</span> </td>
 
-            <td class="minSize"> <b>Telefone</b></td>   
+           <td class="minSize"> <b>Email:</b> <span style="padding-left: 29px;">{!Quote.Account.Representante__r.Email__c}</span> </td>
+
+          
         </tr>
 
         <tr>   
-          <td class="minSize"> <b>Condição de pagamento:</b> <span style="padding-left: 40px;">{!Quote.Condi_o_Pagamento__c} </span> </td>
-          <td class="minSize"> <b>Whatsapp:</b> </td>
+          <td style="font-size:12px"> <b>Condição de pagamento:</b> <span style="padding-left: 15px;">{!Quote.Condi_o_Pagamento__c} </span> </td>
+
+            <td  class="minSize"> <b> Data: </b>  <span style="padding-left: 32px;"><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                  <apex:param value="{!Quote.CreatedDate}" />
+               </apex:outputText></span> </td>
         </tr>
 
-        <tr>
-           <td class="minSize"> <b>Email:</b></td>
-        </tr>
+   
 
    </table>
 
@@ -199,18 +202,18 @@
           <td class="colorTable colorFontTable bold textCenter minSize" style="padding-left: 6px" colspan="8"> DADOS DO CLIENTE </td>
        </tr>
 
-       <tr>
-         <td class="minSize"> <b> Cliente: </b> <span style="padding-left: 40px;"> {!Quote.Account.Name} </span> </td>
-         <td class="minSize"> <b> Contato: </b> <span style="padding-left: 40px;"> {!Quote.Contact.Salutation}{!Quote.Contact.Name} </span> </td>
+       <tr class="alignL">
+         <td class="minSize"> <b> Cliente: </b> <span style="padding-left: 44px;"> {!Quote.Account.Name} </span> </td>
+         <td class="minSize"> <b> Contato: </b> <span style="padding-left: 27px;"> {!Quote.Contact.Salutation}{!Quote.Contact.Name} </span> </td>
        </tr>
 
-       <tr> 
-          <td class="minSize"> <b> Documento: </b> <span style="padding-left: 40px;"> {!Quote.Account.Documento__c} </span> </td>
-            <td class="minSize"> <b> Telefone: </b> <span style="padding-left: 40px;"> {!Quote.Account.Phone} </span> </td>
+       <tr class="alignL"> 
+          <td class="minSize"> <b> Documento: </b> <span style="padding-left: 18px;"> {!Quote.Account.Documento__c} </span> </td>
+            <td class="minSize"> <b> Telefone: </b> <span style="padding-left: 22px;"> {!Quote.Account.Phone} </span> </td>
        </tr>
 
-       <tr>  
-          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 40px;"> {!Quote.Account.Canal__c} </span> </td>
+       <tr class="alignL">  
+          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 28px;"> {!Quote.Account.Canal__c} </span> </td>
             <td class="minSize"> <b> Email: </b> <span style="padding-left: 40px;"> {!Quote.Account.Email__c} </span> </td>
        </tr>
 
@@ -264,11 +267,21 @@
             <td class="fontMin">{!Quote.ShippingCountry}</td>
          </tr>
          
-        
+      
+
         </table>
   </td>
 
         </tr>
+    
+    <apex:form>
+          <tr>
+
+           <td class=" minSize"><b>Frete Interno:</b> <span style="padding-left: 20px;">{!Quote.Frete_Grande_SP__c}</span> </td>
+
+        </tr>
+        </apex:form>
+
    </table>
 
      <table style="margin-top: 30px">
