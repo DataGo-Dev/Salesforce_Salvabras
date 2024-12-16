@@ -19,8 +19,10 @@ const fields = [
 export default class SalesWinProdutoModal extends LightningModal {
 
     @api recordId; @api record; @api product2id;
-    @track fields; msg;  productName; loading=false;
+    @track fields; msg;  productName; loading=false; scrollPosition;
     async connectedCallback() {
+
+        this.scrollPosition = window.scrollY;
 
         this.loading = true;
         this.productInfos = await getProductInfos({productId: this.product2id});
@@ -121,6 +123,12 @@ export default class SalesWinProdutoModal extends LightningModal {
 
     get disableBtn(){
         return this.msg ? true : false;
+    }
+
+    closeAction() {
+        this.close();
+
+        window.scrollTo(0, this.scrollPosition);
     }
 
 }
