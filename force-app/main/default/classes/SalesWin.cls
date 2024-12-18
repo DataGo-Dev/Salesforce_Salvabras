@@ -1,6 +1,6 @@
 public with sharing class SalesWin {
 
-   
+
     @AuraEnabled
     public static List<Opportunity> getOpps(String accountId, Integer offset){
         

@@ -4,7 +4,6 @@ public with sharing class SalesWinProdutos_Test {
     @TestSetup
     static void makeData(){
 
-
         FilialFaturamento__c filialfaturamento = new FilialFaturamento__c();
             filialfaturamento.name = 'FILIAL OSASCO';
             filialfaturamento.cep__c = '06230110';
