@@ -1,0 +1,15 @@
+<template>
+    <div class="flexRow head" style="position: relative;">
+        <lightning-spinner alternative-text="Loading" size="small" if:true={loading}></lightning-spinner>
+        <div class="flexRow" style="flex-grow: 1; font-size: 14px;">
+            <b></b>
+        </div>
+    
+        <div class="actions">
+            <lightning-button variant="brand" label="Salvar como Anexo" onclick={savePdf}></lightning-button>
+        </div>
+    </div>
+    <div class="divMain" if:true={url}>
+        <iframe class="frame" title="Visualizar PDF" src={url}></iframe>
+    </div>
+</template>
