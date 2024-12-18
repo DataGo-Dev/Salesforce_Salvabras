@@ -313,19 +313,42 @@ public with sharing class SalesWinProdutos_Test {
             quote.tipoprogramado__c = 'Padrão';
         insert quote;
         
+
+        QuoteLineItem quotelineitem = new QuoteLineItem();
+        quotelineitem.quoteid = quote.id;
+        quotelineitem.pricebookentryid = pricebookentry.id;
+        quotelineitem.quantity = 10.00;
+        quotelineitem.unitprice = 10.44;
+        quotelineitem.discount = 0.00;
+        quotelineitem.product2id = product2_produtodistribuicao.Id;
+        quotelineitem.tipooperacao__c = '11';
+        quotelineitem.cubagemtotalnum__c = 0.01;
+        quotelineitem.pesototalnum__c = 2.00;
+        insert quotelineitem;
     }
 
     @isTest
     static void getProdutosAleloByOppIdTest(){
-        Opportunity opp = [SELECT Id FROM Opportunity LIMIT 1];
+        Quote quote = [SELECT Id FROM Quote LIMIT 1];
         Product2 prod = [SELECT Id FROM Product2 LIMIT 1];
 
-        String recordId = opp.Id;
+        String recordId = quote.Id;
         String prodId = prod.Id;
+
+
+        List<QuoteLineItem> olis = [SELECT Id FROM QuoteLineItem WHERE quoteid = :quote.Id];
 
         Test.startTest();
             SalesWinProdutos.searchProducts(recordId, '');
             SalesWinProdutos.getProductInfos(prodId);
+            SalesWinProdutos.getProducts(recordId);
+
+            List<String> itensToDel = new List<String>();
+            itensToDel.add(olis[0].Id);
+ 
+            SalesWinProdutos.deleteItens(itensToDel);
+
+
         Test.stopTest();
     
     }
