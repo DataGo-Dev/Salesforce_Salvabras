@@ -27,7 +27,8 @@
 }
 
 .image{
-    height: 70px;
+    min-width: 80px;
+    max-width: 80px;
 }
 
 lightning-icon{
