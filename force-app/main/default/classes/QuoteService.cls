@@ -9,8 +9,6 @@ public with sharing class QuoteService {
                 LIMIT 1
             ];
           
-      
-
             PageReference pdfinho = new PageReference('/apex/' + reportName);
             pdfinho.getParameters().put('Id', recordId);
             Blob pagePdf = System.Test.isRunningTest() ? Blob.valueOf('test') : pdfinho.getContent();

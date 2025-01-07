@@ -213,7 +213,9 @@
        </tr>
 
        <tr class="alignL">  
-          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 28px;"> {!Quote.Account.Canal__c} </span> </td>
+          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 28px;"> {!Quote.Account.RamoAtividadeConta__c} </span> </td>
+
+          
             <td class="minSize"> <b> Email: </b> <span style="padding-left: 40px;"> {!Quote.Account.Email__c} </span> </td>
        </tr>
 
