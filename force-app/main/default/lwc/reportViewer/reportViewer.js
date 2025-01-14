@@ -12,6 +12,10 @@ export default class ReportViewer extends LightningElement {
         this.url = `${window.location.origin}/apex/QuoteReport?id=${this.recordId}`;
     }
 
+    get isMobile() {
+        return /SalesforceMobile/i.test(window.navigator.userAgent);
+    }
+
     async savePdf(){
 
         this.loading = true;

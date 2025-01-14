@@ -213,76 +213,91 @@
        </tr>
 
        <tr class="alignL">  
-          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 28px;"> {!Quote.Account.Canal__c} </span> </td>
+          <td class="minSize"> <b> Atividade: </b> <span style="padding-left: 28px;"> {!Quote.Account.RamoAtividadeConta__c} </span> </td>
+
+          
             <td class="minSize"> <b> Email: </b> <span style="padding-left: 40px;"> {!Quote.Account.Email__c} </span> </td>
        </tr>
 
    </table>
 
    <table class="spaceTable">   
-        <tr>  
-          <td class="colorTable colorFontTable bold textCenter minSize" style="padding-left: 6px" colspan="8"> ENDEREÇOS </td>
+      <tr>  
+        <td class="colorTable colorFontTable bold textCenter minSize" style="padding-left: 6px" colspan="8"> ENDEREÇOS </td>
+     </tr>
+
+     <tr>
+         <td></td>
+  <td>
+      <table>
+       <tr> 
+         <td style="font-size: 11px;"  class="bold2"> Endereço de cobrança:</td>
+          <td class="fontMin">{!Quote.BillingStreet}</td>
        </tr>
 
-       <tr>
-           <td class="minSize bold2"> Endereço de cobrança:</td>
-    <td>
-        <table class="">
-         <tr> 
-            <td class="fontMin">{!Quote.BillingStreet}</td>
-         </tr>
+        <tr> 
+         <td></td>
+          <td class="fontMin">{!Quote.BillingCity}-{!Quote.BillingState}</td>
+       </tr>
 
-          <tr> 
-            <td class="fontMin">{!Quote.BillingCity}-{!Quote.BillingState}</td>
-         </tr>
+        <tr> 
+         <td></td>
+          <td class="fontMin">{!Quote.BillingPostalCode}</td>
+       </tr>
 
-          <tr> 
-            <td class="fontMin">{!Quote.BillingPostalCode}</td>
-         </tr>
-
-          <tr> 
-            <td class="fontMin">{!Quote.BillingCountry}</td>
-         </tr>
-         
-        
-        </table>
-  </td>
-
-       <td  class=" minSize bold2"> Endereço de cobrança: </td>
-         <td>
-        <table class="">
-         <tr> 
-            <td class="fontMin">{!Quote.ShippingStreet}</td>
-         </tr>
-
-          <tr> 
-            <td class="fontMin">{!Quote.ShippingCity}-{!Quote.ShippingState}</td>
-         </tr>
-
-          <tr> 
-            <td class="fontMin">{!Quote.ShippingPostalCode}</td>
-         </tr>
-
-          <tr> 
-            <td class="fontMin">{!Quote.ShippingCountry}</td>
-         </tr>
-         
+        <tr> 
+         <td></td>
+          <td class="fontMin">{!Quote.BillingCountry}</td>
+       </tr>
+       
       
+      </table>
+</td>
 
-        </table>
-  </td>
+     <td ></td>
+       <td>
+      <table>
 
-        </tr>
+        
+       <tr> 
+         <td style="font-size: 11px;" class="bold2"> Endereço de Envio: </td>
+          <td class="fontMin alignR">{!Quote.ShippingStreet}</td>
+       </tr>
+
+        <tr> 
+         <td></td>
+          <td style="padding-left: 26px;" class="fontMin">{!Quote.ShippingCity}-{!Quote.ShippingState}</td>
+       </tr>
+
+        <tr> 
+         <td></td>
+          <td style="padding-left: 26px;"  class="fontMin">{!Quote.ShippingPostalCode}</td>
+       </tr>
+
+        <tr> 
+         <td></td>
+          <td style="padding-left: 26px;"  class="fontMin">{!Quote.ShippingCountry}</td>
+       </tr>
+      </table>
     
-    <apex:form>
-          <tr>
 
-           <td class=" minSize"><b>Frete Interno:</b> <span style="padding-left: 20px;">{!Quote.Frete_Grande_SP__c}</span> </td>
+     
+</td>
 
-        </tr>
-        </apex:form>
-
+      </tr>
    </table>
+
+  <table style="margin-top: 20px;">
+  <apex:form>
+        <tr>
+
+         <td class=" minSize"><b>Frete Interno:</b> <span style="padding-left: 20px;">{!Quote.Frete_Grande_SP__c}</span> </td>
+
+      </tr>
+      </apex:form>
+   </table>
+
+
 
      <table style="margin-top: 30px">
 
@@ -340,45 +355,49 @@
 
           </apex:repeat>
         
-         <br/>
-  
-          <tr class=" fontMin bold2">
+      
+     </table>
+
+     <table style="margin-top: 10px;">
+
+      <tr class="fontMin bold2">
 
 
-             <td class="alignR" colspan="4"> SUBTOTAL </td>
-             
-             <td class="alignL" style="width:23%;padding-left:16px">R$ 
-
-         <apex:outputText value="{0,number, ###,###,###,##0.00}">
-            <apex:param value="{!Quote.Subtotal}"/>
-         </apex:outputText>    </td>       
+         <td  colspan="6" >  </td>
          
-         
-           </tr>
+         <td class="alignR" style="width:23%;padding-right:12px">SUBTOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R$ 
+
+     <apex:outputText value="{0,number, ###,###,###,##0.00}">
+        <apex:param value="{!Quote.Subtotal}"/>
+     </apex:outputText>    </td>       
+     
+     
+       </tr>
 
 
-          <tr class=" fontMin bold2">
-             <td class="alignR" colspan="4"> DESCONTO </td>
+      <tr class=" fontMin bold2">
+         <td class="alignR" colspan="6">  </td>
 
 
-             <td class="alignL" style="width:23%;padding-left:32px" ><apex:outputText value="{0, number, ###,##0}">
-                <apex:param value="{!Quote.Discount}" />
-            </apex:outputText>%</td>  
+         <td class="alignR" style="width:23%;padding-right:25px" ><apex:outputText value="{0, number, ###,##0}">DESCONTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:param value="{!Quote.Discount}" />
+        </apex:outputText>%</td>  
 
 
-           </tr>
+       </tr>
 
-           <tr class=" fontMin bold2">
-             <td class="alignR" colspan="4"> VALOR TOTAL </td>
+       <tr class=" fontMin bold2">
+         <td class="alignR" colspan="6">  </td>
 
-             <td class="alignL" style="width:23%;padding-left:16px">R$ 
+         <td class="alignR" style="width:23%;padding-right:12px">VALOR TOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R$ 
 
-         <apex:outputText value="{0,number, ###,###,###,##0.00}">
-            <apex:param value="{!Quote.TotalPrice}"/>
-         </apex:outputText> </td>          
-           </tr>
+     <apex:outputText value="{0,number, ###,###,###,##0.00}">
+        <apex:param value="{!Quote.TotalPrice}"/>
+     </apex:outputText> </td>          
+       </tr>
 
      </table>
+
  <table style="margin-top:30px">
         
         <tr>

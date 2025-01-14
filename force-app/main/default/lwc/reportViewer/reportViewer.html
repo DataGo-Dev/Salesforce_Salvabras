@@ -1,15 +1,25 @@
 <template>
-    <div class="flexRow head" style="position: relative;">
-        <lightning-spinner alternative-text="Loading" size="small" if:true={loading}></lightning-spinner>
-        <div class="flexRow" style="flex-grow: 1; font-size: 14px;">
-            <b></b>
+    <template if:false={isMobile}>
+        <div class="flexRow head" style="position: relative;">
+            <lightning-spinner alternative-text="Loading" size="small" if:true={loading}></lightning-spinner>
+            <div class="flexRow" style="flex-grow: 1; font-size: 14px;">
+                <b>Visualizar</b>
+            </div>
+            <div class="actions">
+                <lightning-button variant="brand" label="Salvar como Anexo" onclick={savePdf}></lightning-button>
+            </div>
         </div>
-    
-        <div class="actions">
-            <lightning-button variant="brand" label="Salvar como Anexo" onclick={savePdf}></lightning-button>
+        <div class="divMain" if:true={url}>
+            <iframe class="frame" title="Visualizar PDF" src={url}></iframe>
         </div>
-    </div>
-    <div class="divMain" if:true={url}>
-        <iframe class="frame" title="Visualizar PDF" src={url}></iframe>
-    </div>
+    </template>
+    <template if:true={isMobile}>
+        <div class="flexColumn head gap mobileMain">
+            <lightning-spinner alternative-text="Loading" size="small" if:true={loading}></lightning-spinner>
+            <p style="font-weight: bold;">Relatório de Cotação</p>
+            <button style="margin: 0;" class="slds-button slds-button_brand btn" onclick={savePdf}>Salvar como Anexo</button>
+            <button style="margin: 0;" class="slds-button slds-button_brand btn" onclick={closeAction}>Fechar</button>
+        </div>
+    </template>
+   
 </template>

@@ -19,15 +19,34 @@
     padding: 10px;
     display: flex;
     justify-content: end;
-    flex-direction: row; 
-    
+    flex-direction: row;
 }
 .flexRow{
     display: flex;
     flex-direction: row;
 }
 
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+
 .head{
     align-items: center;
 }
 
+.gap{
+    gap: 10px;
+}
+
+.mobileMain{
+    position: relative; 
+    height: 100vh; 
+    width: 95vw; 
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    width: 250px; height: 60px;
+}
