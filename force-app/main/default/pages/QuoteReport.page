@@ -291,7 +291,7 @@
   <apex:form>
         <tr>
 
-         <td class=" minSize"><b>Frete Interno:</b> <span style="padding-left: 20px;">{!Quote.Frete_Grande_SP__c}</span> </td>
+         <td class=" minSize"><b>Frete Interno:</b> <span style="padding-left: 20px;">{!IF(Quote.Frete_Grande_SP__c == true,'SIM', 'NÃO')}</span> </td>
 
       </tr>
       </apex:form>
