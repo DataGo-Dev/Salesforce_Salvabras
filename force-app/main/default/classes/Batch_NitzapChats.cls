@@ -142,7 +142,13 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
                 t.Priority = 'Normal';
                 t.CurrencyIsoCode = 'BRL';
                 t.Subject = 'Conversa Whatsapp';
-                t.WhatId = recId;
+
+                if (sObj.getSObjectType() == Contact.SObjectType || sObj.getSObjectType() == Lead.SObjectType) {
+                    t.WhoId = sObj.Id;
+                } else {
+                    t.WhatId = sObj.Id;
+                }
+
                 tasksToCreate.add(t);
             }
 
@@ -151,7 +157,8 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
     }
 
     public void finish(Database.BatchableContext BC) {
-        system.debug('Nr de tarefas criadas : ' + tasksToCreate.size());
-        system.debug('Nr de registros atualizados : ' + recsToUpdate.size);
+        system.debug('Batch finalizado!');
     }
 }
+
+// sf project deploy start --metadata ApexClass:Batch_NitzapChats --metadata ApexClass:Batch_NitzapChats_Test -l RunSpecifiedTests -t Batch_NitzapChats_Test -o Connection_Salvabras
