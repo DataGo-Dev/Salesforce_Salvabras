@@ -78,12 +78,8 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
             SELECT Id, Name, nitzap20__WhatsAppId__c, OwnerId FROM Contact WHERE FinWid__c IN :chaves
         ]);
         resultados.addAll([
-            SELECT Id, Name, nitzap20__WhatsAppId__c, OwnerId FROM Lead WHERE FinWid__c IN :chaves
+            SELECT Id, Name, nitzap20__WhatsAppId__c, OwnerId FROM Lead WHERE FinWid__c IN :chaves AND IsConverted = FALSE
         ]);
-        // resultados.addAll([
-        //     SELECT Id, Name, nitzap20__WhatsAppId__c, OwnerId FROM Account WHERE FinWid__c IN :chaves
-        // ]);
-
         return resultados;
     }
 
@@ -96,9 +92,7 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
                 wid = ((Contact) reg).nitzap20__WhatsAppId__c;
             } else if (reg.Id.getSObjectType() == Lead.SObjectType) {
                 wid = ((Lead) reg).nitzap20__WhatsAppId__c;
-            } //else if (reg.Id.getSObjectType() == Account.SObjectType) {
-            //     wid = ((Account) reg).nitzap20__WhatsAppId__c;
-            // }
+            } 
 
             for (DataWrapperChat chat : response) {
                 String secondwhatsappid = chat.secondwhatsappid;
