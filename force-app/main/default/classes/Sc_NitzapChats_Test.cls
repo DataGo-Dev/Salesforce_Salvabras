@@ -34,3 +34,8 @@ public class Sc_NitzapChats_Test {
         System.assertEquals('0 0 22 * * ?', ct.CronExpression);
     }
 }
+
+// String cronExp = '0 0 22 * * ?'; // todos os dias às 22:00
+// String jobName = 'NitzapChats_Diario_22h';
+
+// System.schedule(jobName, cronExp, new Sc_NitzapChats());
