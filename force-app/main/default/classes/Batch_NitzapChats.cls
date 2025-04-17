@@ -124,34 +124,56 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
         if (!recsToUpdate.isEmpty()) {
             update recsToUpdate.values();
 
+            Set<String> mywhatsIds = new Set<String>();
+                for (DataWrapperChat chat : response) {
+                    if (!String.isBlank(chat.mywhatsid)) {
+                        mywhatsIds.add(chat.mywhatsid.split('@').get(0));
+                        }
+                    }
+            
+            Map<String, Id> mywhatsidToUserId = new Map<String, Id>();
+                for (User u : [
+                    SELECT Id, nitzap20__WhatsAppId__c
+                    FROM User
+                    WHERE nitzap20__WhatsAppId__c IN :mywhatsIds
+                    ]) {
+                    mywhatsidToUserId.put(u.nitzap20__WhatsAppId__c, u.Id);
+                    }
+            
             List<Task> tasksToCreate = new List<Task>();
+            Datetime meiaNoiteHoje = Datetime.newInstance(Date.today(), Time.newInstance(0, 0, 0, 0));
+
             for (Id recId : recsToUpdate.keySet()) {
-                SObject sObj = recsToUpdate.get(recId);
-                Id ownerId = (Id) sObj.get('OwnerId');
-
-                Task t = new Task();
-                t.OwnerId = ownerId;
-                t.ActivityDate = Date.today();
-                t.Status = 'Concluído';
-                t.Priority = 'Normal';
-                t.CurrencyIsoCode = 'BRL';
-                t.Subject = 'Conversa Whatsapp';
-
-                if (sObj.getSObjectType() == Contact.SObjectType || sObj.getSObjectType() == Lead.SObjectType) {
-                    t.WhoId = sObj.Id;
-                } else {
-                    t.WhatId = sObj.Id;
+            SObject sObj = recsToUpdate.get(recId);
+            String contactWhatsId = (String) sObj.get('nitzap20__WhatsAppId__c');
+            
+                for (DataWrapperChat chat : response) {
+                    if (chat.secondwhatsappid != null && chat.secondwhatsappid.contains(contactWhatsId)) {
+                        String chatMyWhatsId = chat.mywhatsid.split('@').get(0);
+                        Id ownerId = mywhatsidToUserId.get(chatMyWhatsId);
+            
+                        Task t = new Task();
+                        t.OwnerId = ownerId != null ? ownerId : UserInfo.getUserId(); 
+                        t.ActivityDate = Date.today();
+                        t.Status = 'Concluído';
+                        t.Priority = 'Normal';
+                        t.CurrencyIsoCode = 'BRL';
+                        t.Subject = 'Conversa Whatsapp';
+                        t.nitzap20__Date_Time_Start_Chat__c = meiaNoiteHoje;
+                        t.WhoId = sObj.Id;
+            
+                        tasksToCreate.add(t);
+                        break;
+                            }
+                        }
+                    }
+            
+                insert tasksToCreate;
                 }
-
-                tasksToCreate.add(t);
             }
-
-            insert tasksToCreate;
-        }
-    }
-
-    public void finish(Database.BatchableContext BC) {
-        system.debug('Batch finalizado!');
+            
+    global void finish(Database.BatchableContext BC) {
+        System.debug('Batch finalizado!');
     }
 }
 
