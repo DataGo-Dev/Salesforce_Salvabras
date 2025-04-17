@@ -141,7 +141,8 @@ global class Batch_NitzapChats implements Database.Batchable<sObject>, Database.
                 }
             
             Map<String,Task> tasksToCreate = new Map<String,Task>();
-            Datetime meiaNoiteHoje = Datetime.newInstance(Date.today(), Time.newInstance(0, 0, 0, 0));
+            TimeZone tz = TimeZone.getTimeZone('America/Sao_Paulo');
+            Datetime meiaNoiteHoje = Datetime.newInstance(Date.today(), Time.newInstance(0, 0, 0, 0)).addSeconds(tz.getOffset(Date.today()) / 1000);
 
             for (Id recId : recsToUpdate.keySet()) {
                 SObject sObj = recsToUpdate.get(recId);
